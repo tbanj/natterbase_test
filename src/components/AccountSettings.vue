@@ -4,7 +4,7 @@
       <h4 id="headColor">{{ settingTitle }}</h4>
       <p id="subTitle">Monday, July 22, 2019.</p>
     </div>
-    <div class="container card">
+    <div class="container card shadow-sm">
       <div class="row container">
         <img src="/images/personal_info.svg" class="mr-2" alt="personal icon" />
         <h5 class="mt-3">{{settingSubTitle}}</h5>
@@ -21,7 +21,7 @@
 
       <div>
         <!-- @submit="checkForm" action="https://vuejs.org/"  method="post" -->
-        <form >
+        <form class="my-4">
 
          <p v-if="errors.length">
           <b>Please correct the following error(s):</b>
@@ -57,34 +57,36 @@
           </div>
           
          
-          <button type="submit" @click.prevent="checkForm" class="buttonSubmit btn btn-primary">Submit</button>
+          <button type="submit" @click.prevent="checkForm" class="buttonSubmit btn btn-primary ">Submit</button>
         </form>
+        <hr class="my-4"/>
+
 
         <form >
 
           <div class="row">
             <div class="form-group col-md-4">
-            <label for="currentPassword">Password</label>
+            <label for="currentPassword">CURRENT PASSWORD</label>
             <input type="password" class="form-control" name="currentPassword" v-model="checkPassword.currentPassword"  id="currentPassword" placeholder="Password">
           </div>
           <div class="form-group col-md-4">
-            <label for="newPassword">Password</label>
+            <label for="newPassword">NEW PASSWORD</label>
             <input type="password" class="form-control" name="newPassword" v-model="checkPassword.newPassword" id="newPassword" placeholder="Password">
           </div>
           <div class="form-group col-md-4">
-            <label for="confirmPassword">Password</label>
+            <label for="confirmPassword">CONFIRM PASSWORD</label>
             <input type="password" class="form-control" name="confirmPassword" v-model="checkPassword.confirmPassword" id="confirmPassword" placeholder="Password">
           </div>
           </div>
-           <button type="submit" @click.prevent="checkFormPassword" class="buttonSubmit btn btn-primary">Submit</button>
+           <button type="submit" @click.prevent="checkFormPassword" class="buttonSubmit btn btn-primary my-4">Submit</button>
         </form>
       </div>
     </div>
 
 
     <!-- change state of residence -->
-    <div class="container mt-5">
-        <div class="card container">
+    <div class="container my-5">
+        <div class="card shadow-sm container">
             <div class="row">
         <img src="/images/personal_info.svg" class="mr-2" alt="personal icon" />
         <h5 class="mt-3"> {{settingStateSubTitle}}</h5>
@@ -147,7 +149,7 @@
             
           </div>
           </div>
-          <button type="submit" @click.prevent="formStateChange" class="buttonSubmit btn btn-primary">Save Changes</button>
+          <button type="submit" @click.prevent="formStateChange" class="buttonSubmit btn btn-primary my-4">Save Changes</button>
         </form>
 
         
