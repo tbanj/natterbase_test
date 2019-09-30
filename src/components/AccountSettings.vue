@@ -31,7 +31,7 @@
         </p>
           <div class="form-group">
             <label for="email">EMAIL ADDRESS</label>
-            <input type="email" name="email" v-model="personal.email" class="form- col-md-4" disabled id="email"  >
+            <input type="email" name="email" v-model="personal.email" class="form-control col-md-4" disabled id="email"  >
             
           </div>
           <div class="row">
