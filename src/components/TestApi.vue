@@ -81,9 +81,9 @@ export default {
 </script>
 
 <style lang="scss">
-body {
+.test_api {
   font-family: "Archivo Narrow", sans-serif;
-  background: #25859a;
+  //   background-color: #25859a;
 }
 
 h1,
