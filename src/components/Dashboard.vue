@@ -24,7 +24,7 @@
       <div class="card shawdow-sm">
         <h5 class="applyInsure card-header">Insurance Applications</h5>
         <!-- <hr /> -->
-        <Tablemin />
+        <Tablemin :rows="rowss" :columns="columnss" :bottom="bottom" />
       </div>
     </div>
   </div>
@@ -32,17 +32,58 @@
 
 <script>
 import Tablemin from "./Table.vue";
-
+import axios from "axios";
+import env from "../env";
 export default {
   name: "Dashboard",
   components: {
     Tablemin
   },
-  props: {
-    msg: String
-  },
+  props: {},
   data: function() {
     return {
+      columnss: [
+        {
+          label: "S/N",
+          field: "id",
+          type: "number"
+        },
+        {
+          label: "Insurance Type",
+          field: "insuranceType",
+          type: "number"
+        },
+        {
+          label: "Amount",
+          field: "amount",
+          type: "number"
+        },
+        {
+          label: "Date",
+          field: "createdAt",
+          type: "string"
+          // dateInputFormat: "yyyy-MM-dd",
+          // dateOutputFormat: "yyyy:MM-dd"
+        },
+        {
+          label: "Status",
+          field: "status",
+          type: "name"
+        },
+        {
+          label: "Action",
+          field: "action",
+          type: "name"
+        },
+        {
+          label: "",
+          field: "moreInfo",
+          type: "link"
+        }
+      ],
+      bottom: false,
+      rowss: [],
+      beers: [],
       items: [
         {
           id: 1,
@@ -75,6 +116,59 @@ export default {
         }
       ]
     };
+  },
+  watch: {},
+  created() {
+    this.addApplication();
+  },
+  methods: {
+    convertDate(data) {
+      let dateConvert = new Date(data);
+      dateConvert = dateConvert.toDateString();
+      let dateConverti = dateConvert.split(" ");
+      let actualDate = dateConverti.slice(1);
+
+      return actualDate.join(" ");
+    },
+    bottomVisible() {
+      const scrollY = window.scrollY;
+      const visible = document.documentElement.clientHeight;
+      const pageHeight = document.documentElement.scrollHeight;
+      const bottomOfPage = visible + scrollY >= pageHeight;
+      return bottomOfPage || pageHeight < visible;
+    },
+    addApplication() {
+      axios
+        .get(env.api, {
+          headers: {
+            token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjYjg2NWZmMzFhZWRkMzQxNDU0OTQ2YiIsImlhdCI6MTU2NTk0Nzg1NCwiZXhwIjoxNTY1OTU1MDU0fQ.5ujc_dMloqYdyoQN556PhGwIqa1OfGwt06vD5iKu-lg"
+          }
+        })
+        .then(response => {
+          // let api = response.data[0];
+          if (response.data) {
+            let api = response.data.applications;
+            let id = 1;
+
+            for (let index = 0; index < api.length; index++) {
+              let apiInfo = {
+                id: id++,
+                insuranceType: api[index].insuranceType,
+                amount: api[index].amount,
+                createdAt: this.convertDate(api[index].createdDate),
+                status: api[index].complete ? "Completed" : "Incomplete",
+                action: api[index].complete
+                  ? "Make a Claim"
+                  : "Complete Process",
+                moreInfo: "More Actions"
+              };
+              this.rowss.push(apiInfo);
+            }
+            this.bottom = true;
+          }
+        });
+    }
   }
 };
 </script>
@@ -90,23 +184,10 @@ export default {
 }
 
 .headerText {
-  font-family: Avenir Next;
-  font-size: 32px;
-  line-height: 44px;
-  display: flex;
-  align-items: center;
-  letter-spacing: -0.8px;
-
   color: #4d0032;
 }
 
 .applyInsure {
-  /* font-family: Avenir Next;
-  font-size: 18px;
-  line-height: 25px;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.1px; */
   background-color: #ffffff;
   color: #4d0032;
 }
@@ -118,14 +199,6 @@ export default {
   height: 200px;
   width: 260px;
 }
-/* 
-#imgInsuranceAmount {
-  background-image: url("/images/Card_c4.svg");
-}
-
-#imgInsuranceTotal {
-  background-image: url("/images/Card_c2.svg");
-} */
 
 .insuranceText {
   font-family: Avenir Next;

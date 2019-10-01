@@ -49,7 +49,7 @@ export default {
     window.addEventListener("scroll", () => {
       this.bottom = this.bottomVisible();
     });
-    this.addBeer();
+    // this.addBeer();
   },
   methods: {
     bottomVisible() {

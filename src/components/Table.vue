@@ -1,14 +1,14 @@
 <template>
   <div class="my-component">
-  
-
-    <vue-good-table :columns="columns" :rows="rows" styleClass="vgt-table striped">
+    <!-- {{ rowss }} {{ bottoma }}{{ columnss }}  -->
+    <!-- :columns="columns" :rows="rows"  -->
+    <vue-good-table :columns="columnss" :rows="rowss" styleClass="vgt-table striped">
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'status'">
           <button
             type="button"
             class="btn"
-            :style="[props.row.action=== 'Make a Claim'?
+            :style="[props.row.status=== 'Completed'?
              {'color': '#6ADD0E','background': 'rgba(106, 221, 14, 0.2)'} : 
              {'color': '#FD5262', 'background': 'rgba(253, 82, 98, 0.2)'}]"
           >
@@ -44,77 +44,24 @@ export default {
   components: {
     VueGoodTable
   },
+  created() {},
   data() {
     return {
-      columns: [
-        {
-          label: "S/N",
-          field: "id",
-          type: "number"
-        },
-        {
-          label: "Insurance Type",
-          field: "insuranceType",
-          type: "number"
-        },
-        {
-          label: "Amount",
-          field: "amount",
-          type: "number"
-        },
-        {
-          label: "Date",
-          field: "createdAt",
-          type: "date",
-          dateInputFormat: "yyyy-MM-dd",
-          dateOutputFormat: "yyyy:MM-dd"
-        },
-        {
-          label: "Status",
-          field: "status",
-          type: "name"
-        },
-        {
-          label: "Action",
-          field: "action",
-          type: "name"
-        },
-        {
-          label: "",
-          field: "moreInfo",
-          type: "link"
-        }
-      ],
-      rows: [
-        {
-          id: 1,
-          insuranceType: "Travel Insurance",
-          amount: 31400000,
-          createdAt: "2011-10-31",
-          status: "Completed",
-          action: "Make a Claim",
-          moreInfo: "More Actions"
-        },
-        {
-          id: 2,
-          insuranceType: "Travel Better",
-          amount: 21400000,
-          createdAt: "2011-10-30",
-          status: "Completed",
-          action: "Complete Process",
-          moreInfo: "More Actions"
-        },
-        {
-          id: 3,
-          insuranceType: "Travel Better",
-          amount: 21400000,
-          createdAt: "2011-10-30",
-          status: "Completed",
-          action: "Make a Claim",
-          moreInfo: "More Actions"
-        }
-      ]
+      columnss: this.columns,
+      rowss: this.rows
+      // columnsss: [],
+      // rowsss: []
     };
+  },
+  props: {
+    columns: Array,
+    rows: Array
+    // columnss: Array,
+    // rowss: Array,
+    // bottoma: Boolean
+  },
+  methods: {
+    checkdata() {}
   }
 };
 </script>
@@ -135,5 +82,9 @@ export default {
 
 .vgt-table.striped tbody tr:nth-of-type(odd) {
   background: #f8f7f6;
+}
+
+.vgt-right-align {
+  text-align: left;
 }
 </style>
