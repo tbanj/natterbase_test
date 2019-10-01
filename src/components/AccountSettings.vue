@@ -1,11 +1,10 @@
 <template>
   <div  class="account-setting">
     <div class="container">
-      <h4 id="headColor">{{ settingTitle }}</h4>
-      <p id="subTitle">Monday, July 22, 2019.</p>
+      <h4 id="headColor" CLASS="my-5">{{ settingTitle }}</h4>
     </div>
     <div class="container ">
-        <div class="card shaodow-sm container">
+        <div class="card shadow-lg container">
             <div class="row container my-4">
         <img src="/images/personal_info.svg" class="mr-2" alt="personal icon" />
         <h5 class="mt-3">{{settingSubTitle}}</h5>
@@ -26,7 +25,7 @@
           </ul>
         </p>
 
-        <div class="row">
+        <div class="row mb-3" >
            <div class="col-md-1" v-if="personal.image"> <img class="rounded-circle imageReduce"   :src="`${personal.image}`" alt="user image"/></div>
              <div class="col-md-4 ml-2">
                 <div class="form-material form-group">
@@ -41,7 +40,7 @@
                                 </div>
                             <input type="hidden">
                             <input @change="onFileChange" type="file" name="..."> </span> 
-                            <a href="#" @click="removeImage" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                            <a href="#" @click="removeImage" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput"><u>Remove</u></a>
                         </div>
                 </div>
              </div>
@@ -110,7 +109,7 @@
 
     <!-- change state of residence -->
     <div class="container">
-      <div class="card shadow-sm my-5 container">
+      <div class="card shadow-lg my-5 container">
            <div class="row container my-4">
         <img src="/images/personal_info.svg" class="mr-2" alt="personal icon" />
         <h5 class="mt-3"> {{settingStateSubTitle}}</h5>
