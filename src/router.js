@@ -4,6 +4,7 @@ import Dashboard from './components/Dashboard.vue'
 import FourOhFour from './components/FourOhFour.vue'
 import BuyInsurance from './components/BuyInsurance.vue'
 
+
 Vue.use(Router)
 
 export default new Router({
@@ -18,10 +19,14 @@ export default new Router({
     {
       path: '/account-setting',
       name: 'account_settings',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './components/AccountSettings.vue')
+    },
+    {
+      path: '/test-api',
+      name: 'test_api',
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "about" */ './components/TestApi.vue')
     },
     {
       path: '/buy-insurance',

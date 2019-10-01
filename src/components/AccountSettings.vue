@@ -79,28 +79,29 @@
           </div>
           
          
-          <button type="submit" @click.prevent="checkForm" class="buttonSubmit btn btn-primary my-4 btn btn-block col-md-3 ">Save Changes</button>
+          <button type="submit" @click.prevent="checkForm" class="buttonSubmit btn  my-4 btn btn-block col-md-3 ">Save Changes</button>
         </form>
         <hr class="my-4"/>
 
 
         <form >
 
-          <div class="row">
-            <div class="form-group col-md-4">
-            <label for="currentPassword">CURRENT PASSWORD</label>
-            <input type="password" class="form-control" name="currentPassword" v-model="checkPassword.currentPassword"  id="currentPassword" placeholder="Password">
-          </div>
-          <div class="form-group col-md-4">
-            <label for="newPassword">NEW PASSWORD</label>
-            <input type="password" class="form-control" name="newPassword" v-model="checkPassword.newPassword" id="newPassword" placeholder="Password">
-          </div>
-          <div class="form-group col-md-4">
-            <label for="confirmPassword">CONFIRM PASSWORD</label>
-            <input type="password" class="form-control" name="confirmPassword" v-model="checkPassword.confirmPassword" id="confirmPassword" placeholder="Password">
-          </div>
-          </div>
-           <button type="submit" @click.prevent="checkFormPassword" class="buttonSubmit btn btn-primary my-4 btn btn-block col-md-3">Save Changes</button>
+            <div class="row">
+                <div class="form-group col-md-4">
+                  <label for="currentPassword">CURRENT PASSWORD</label>
+                  <input type="password" class="form-control" name="currentPassword" v-model="checkPassword.currentPassword"  id="currentPassword" placeholder="Password">
+                </div>
+              <div class="form-group col-md-4">
+                <label for="newPassword">NEW PASSWORD</label>
+                <input type="password" class="form-control" name="newPassword" v-model="checkPassword.newPassword" id="newPassword" placeholder="Password">
+              </div>
+              <div class="form-group col-md-4">
+                <label for="confirmPassword">CONFIRM PASSWORD</label>
+                <input type="password" class="form-control" name="confirmPassword" v-model="checkPassword.confirmPassword" id="confirmPassword" placeholder="Password">
+              </div>
+            </div>
+            <button type="submit" @click.prevent="checkFormPassword" class="buttonSubmit btn  my-4 btn btn-block col-md-3">Save Changes</button>
+          
         </form>
       </div>
         </div>
@@ -116,8 +117,6 @@
       </div>
 
       <div class=" my-4">Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
-      
-
       <div class="container">
         <form >
 
@@ -151,9 +150,7 @@
             <label for="federalConstituence">FEDERAL CONSTITUENCIES</label>
             <input type="text" name="federalConstituence" v-model="editUserState.federalConstituence"   class="form-control"
              id="federalConstituence" >
-            
           </div>
-
           
           </div>
 
@@ -169,14 +166,12 @@
             <label for="stateConstituence">STATE CONSTITUENCIES</label>
             <input type="text" name="stateConstituence" v-model="editUserState.stateConstituence"  
             class="form-control" id="stateConstituence" >
-            
           </div>
           </div>
 
-          <button type="submit" @click.prevent="formStateChange" class="buttonSubmit btn btn-primary my-4 btn btn-block col-md-3">Save Changes</button>
+          <button type="submit" @click.prevent="formStateChange" 
+            class="buttonSubmit btn  my-4 btn btn-block col-md-3">Save Changes</button>
         </form>
-
-        
       </div>
      
       </div>
@@ -282,7 +277,8 @@ export default {
   color: #4C0032
 }
 .buttonSubmit{
-  background: #F58634
+  background: #F58634;
+  color: #FFFFFF;
 }
 
 

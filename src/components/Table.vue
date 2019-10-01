@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="my-component">
   
 
     <vue-good-table :columns="columns" :rows="rows" styleClass="vgt-table striped">
