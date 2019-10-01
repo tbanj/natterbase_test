@@ -1,6 +1,7 @@
 {
     "include": [
-        "./src/**/*"
+        "./src/**/*",
+        "public/js"
     ],
     "compilerOptions": {
         "baseUrl": ".",
