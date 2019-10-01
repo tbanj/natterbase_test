@@ -1,5 +1,3 @@
-
-
 <template>
   <div>
     <div class="container">
@@ -140,17 +138,13 @@ export default {
     addApplication() {
       axios
         .get(env.api, {
-          headers: {
-            token:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVjYjg2NWZmMzFhZWRkMzQxNDU0OTQ2YiIsImlhdCI6MTU2NTk0Nzg1NCwiZXhwIjoxNTY1OTU1MDU0fQ.5ujc_dMloqYdyoQN556PhGwIqa1OfGwt06vD5iKu-lg"
-          }
+          headers: { token: env.token }
         })
         .then(response => {
           // let api = response.data[0];
           if (response.data) {
             let api = response.data.applications;
             let id = 1;
-
             for (let index = 0; index < api.length; index++) {
               let apiInfo = {
                 id: id++,
@@ -182,16 +176,13 @@ export default {
 #insuranceId {
   background-image: url("/images/Group 4_c1.png");
 }
-
 .headerText {
   color: #4d0032;
 }
-
 .applyInsure {
   background-color: #ffffff;
   color: #4d0032;
 }
-
 .insuranceSize {
   background: #ffffff;
   border: 1px solid #000000;
@@ -199,7 +190,6 @@ export default {
   height: 200px;
   width: 260px;
 }
-
 .insuranceText {
   font-family: Avenir Next;
   font-size: 15px;
