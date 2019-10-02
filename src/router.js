@@ -23,12 +23,7 @@ export default new Router({
       // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './components/AccountSettings.vue')
     },
-    {
-      path: '/test-api',
-      name: 'test_api',
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './components/TestApi.vue')
-    },
+
     {
       path: '/buy-insurance',
       name: 'buyInsurance',

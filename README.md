@@ -1,4 +1,14 @@
 # natterbasetest
+http://wahab.kovad.net/
+[http://wahab.kovad.net/](http://wahab.kovad.net/)
+
+This an application developed with vuejs for the frontend and data populated
+is from api with the use of vuex has state management
+vue router for the routing to different component.
+
+It consist of :-
+i)  Dashboard to populate users application
+ii) Account setting to update users record
 
 ## Project setup
 ```
