@@ -1,8 +1,6 @@
 <template>
   <div class="my-component">
-    <!-- {{ rowss }} {{ bottoma }}{{ columnss }}  -->
-    <!-- :columns="columns" :rows="rows"  -->
-    <vue-good-table :columns="columnss" :rows="rowss" styleClass="vgt-table striped">
+    <vue-good-table :columns="columnss" :rows="checkdata()" styleClass="vgt-table striped">
       <template slot="table-row" slot-scope="props">
         <span v-if="props.column.field == 'status'">
           <button
@@ -44,24 +42,35 @@ export default {
   components: {
     VueGoodTable
   },
-  created() {},
+  watch: {
+    updateRowd: function() {
+      // is use to update async data
+      // if (this.rows.length > this.rowss.length) {
+      //   return (this.rowss = this.rows);
+      // }
+      this.checkdata();
+    }
+  },
+  /*  computted is use for reducing logic in template
+      though watch is also use for that but watch is majorly use for async
+   */
+  // computted: {},
   data() {
     return {
       columnss: this.columns,
-      rowss: this.rows
-      // columnsss: [],
-      // rowsss: []
+      rowss: this.rows,
+      list: ""
     };
   },
   props: {
     columns: Array,
     rows: Array
-    // columnss: Array,
-    // rowss: Array,
-    // bottoma: Boolean
   },
   methods: {
-    checkdata() {}
+    checkdata() {
+      this.rowss = this.rows;
+      return this.rowss;
+    }
   }
 };
 </script>

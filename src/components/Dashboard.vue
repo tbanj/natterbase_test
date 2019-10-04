@@ -22,7 +22,7 @@
       <div class="card shawdow-sm">
         <h5 class="applyInsure card-header">Insurance Applications</h5>
         <!-- <hr /> -->
-        <Tablemin :rows="rowss" :columns="columnss" :bottom="bottom" />
+        <Tablemin :rows="applicationData" :columns="columnss" :bottom="bottom" />
       </div>
     </div>
   </div>
@@ -30,8 +30,8 @@
 
 <script>
 import Tablemin from "./Table.vue";
-import axios from "axios";
-import env from "../env";
+import { getStatistics, getApplications } from "../service/dataService";
+import { mapState, mapActions } from "vuex";
 export default {
   name: "Dashboard",
   components: {
@@ -40,6 +40,8 @@ export default {
   props: {},
   data: function() {
     return {
+      getStatis: [],
+      dataCollected: {},
       columnss: [
         {
           label: "S/N",
@@ -60,8 +62,6 @@ export default {
           label: "Date",
           field: "createdAt",
           type: "string"
-          // dateInputFormat: "yyyy-MM-dd",
-          // dateOutputFormat: "yyyy:MM-dd"
         },
         {
           label: "Status",
@@ -117,51 +117,62 @@ export default {
   },
   watch: {},
   created() {
-    this.addApplication();
+    this.getData();
+    this.getServerApplications();
+  },
+  computed: {
+    ...mapState(["totalTvCount", "statisticsData", "applicationData"]),
+
+    serverStatistics() {
+      return this.$store.state.statisticsData;
+    }
   },
   methods: {
+    ...mapActions(["updateStatistics", "updateApplications"]),
+
+    getData() {
+      var vm = this;
+      getStatistics().then(
+        statistics => {
+          if (statistics) {
+            vm.dataCollected = statistics.data.statistics;
+            this.updateStatistics(this.dataCollected);
+          }
+        },
+        error => {
+          console.error(error); // eslint-disable-line no-console
+        }
+      );
+    },
     convertDate(data) {
       let dateConvert = new Date(data);
       dateConvert = dateConvert.toDateString();
       let dateConverti = dateConvert.split(" ");
       let actualDate = dateConverti.slice(1);
-
       return actualDate.join(" ");
     },
-    bottomVisible() {
-      const scrollY = window.scrollY;
-      const visible = document.documentElement.clientHeight;
-      const pageHeight = document.documentElement.scrollHeight;
-      const bottomOfPage = visible + scrollY >= pageHeight;
-      return bottomOfPage || pageHeight < visible;
-    },
-    addApplication() {
-      axios
-        .get(env.api, {
-          headers: { token: env.token }
-        })
-        .then(response => {
-          // let api = response.data[0];
-          if (response.data) {
-            let api = response.data.applications;
-            let id = 1;
-            for (let index = 0; index < api.length; index++) {
-              let apiInfo = {
-                id: id++,
-                insuranceType: api[index].insuranceType,
-                amount: api[index].amount,
-                createdAt: this.convertDate(api[index].createdDate),
-                status: api[index].complete ? "Completed" : "Incomplete",
-                action: api[index].complete
-                  ? "Make a Claim"
-                  : "Complete Process",
-                moreInfo: "More Actions"
-              };
-              this.rowss.push(apiInfo);
-            }
-            this.bottom = true;
+    getServerApplications() {
+      getApplications().then(response => {
+        if (response.data) {
+          let api = response.data.applications;
+          let id = 1;
+          let storeData = [];
+          for (let index = 0; index < api.length; index++) {
+            let apiInfo = {
+              id: id++,
+              insuranceType: api[index].insuranceType,
+              amount: api[index].amount,
+              createdAt: this.convertDate(api[index].createdDate),
+              status: api[index].complete ? "Completed" : "Incomplete",
+              action: api[index].complete ? "Make a Claim" : "Complete Process",
+              moreInfo: "More Actions"
+            };
+            storeData.push(apiInfo);
           }
-        });
+          this.updateApplications(storeData);
+          this.bottom = true;
+        }
+      });
     }
   }
 };
